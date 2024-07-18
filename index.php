@@ -1,3 +1,9 @@
+<?php
+    require_once('includes/dbh-inc.php');
+    $query = "SELECT * FROM user_list;"; 
+    $result = mysqli_query($conn, $query)
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,38 +13,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <?php
-
-        $dsn = "mysql:host=localhost;dbname=dashboard";
-        $dbusername = "root";
-        $dbpassword = "";
-        $query = "SELECT * FROM user_list;"; 
-
-        try{
-            $pdo = new PDO($dsn, $dbusername, $dbpassword);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->prepare($query); 
-            // EXECUTING THE QUERY 
-            $stmt->execute(); 
-        
-            $r = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-            // FETCHING DATA FROM DATABASE 
-            $result = $stmt->fetchAll(); 
-            // OUTPUT DATA OF EACH ROW 
-            foreach ($result as $row)  
-            { 
-                echo "Author: " . $row["author"]. " - Function: " .  
-                    $row["function"]. "Status: " . $row["status"]. 
-                    "Employed: " . $row["employed"] . "<br>"; 
-            } 
-
-        } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage;
-        }
-
-        
-    ?> 
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h1>Header</h1>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Author</td>
+                                <td>Function</td>
+                                <td>Status</td>
+                                <td>Employed</td>
+                            </tr>
+                            <tr></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
