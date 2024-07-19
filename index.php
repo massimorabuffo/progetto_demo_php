@@ -30,7 +30,7 @@
                                 <label for="employed">Employed: </label>
                                 <input class="form-control" type="text" id="employed">
                                 <br>
-                                <button class="btn btn-primary" onclick="addUser()">Submit</button>
+                                <button class="btn btn-primary" id="submitButton" onclick="addUser()">Submit</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -62,6 +62,8 @@
         </div>
     </div>
     <script>
+        const submitButton = document.getElementById("submitButton");
+
         const toggleForm = () => {
             const form = document.getElementById("form");
             const addUserButton = document.getElementById("add-user-button");
@@ -82,6 +84,7 @@
             const function1 = document.getElementById("function").value;
             const status = document.getElementById("status").value;
             const employed = document.getElementById("employed").value;
+            
 
             if (author === '' || author === null) {
                 alert("Compila il campo 'author'");
@@ -116,9 +119,10 @@
                         },
                         body: JSON.stringify(dataObject),
                     });
-                    const jsonResponse = await request1;
+                    const jsonResponse = await request1.json();
                     if (jsonResponse.status) {
                         alert("User registered.");
+                        toggleForm();
 
                     } else {
                         alert(jsonResponse.message);
