@@ -6,8 +6,15 @@
 $dbname = "dashboard";
 $dbusername = "root";
 $dbpassword = "";
-
-$conn = mysqli_connect("localhost", $dbusername, $dbpassword, $dbname);
+// try{
+    $conn = mysqli_connect("localhost", $dbusername, $dbpassword, $dbname);
+// } catch (Exception $e) {
+//     $message = $e->getMessage();
+//     response()->json([
+//         'status'->false,
+//         'message'->$message,
+//     ])
+// }
 
 
 // try{

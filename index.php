@@ -1,7 +1,7 @@
 <?php
     require_once('includes/dbh-inc.php');
-    $query = "SELECT * FROM user_list;"; 
-    $result = mysqli_query($conn, $query)
+    $query = "SELECT * FROM user_list ORDER BY id DESC;"; 
+    $result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,8 @@
             <div class="col">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h1>Header</h1>
+                        <h1>User's table</h1>
+                        <p class="text-right"><button onclick="addUser()">Add User</button></p>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -28,13 +29,25 @@
                                 <td>Status</td>
                                 <td>Employed</td>
                             </tr>
-                            <tr></tr>
+                            <?php while($row = mysqli_fetch_array($result)){
+                                echo "<tr>
+                                        <td>$row[author]</td>
+                                        <td>$row[function]</td>
+                                        <td>$row[status]</td>
+                                        <td>$row[employed]</td>
+                                        </tr>";
+                            }
+                             ?>
+                            
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        
+    </script>
 
 </body>
 </html>
