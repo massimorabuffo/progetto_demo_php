@@ -134,6 +134,7 @@
         }
 
         const editUser = (button) => {
+            
             // Ottieni la riga corrente
             let row = button.parentNode.parentNode;
 
@@ -156,11 +157,31 @@
             }
 
             // Cambia il testo del bottone
-            
-
+            if(button.textContent === "Save"){
+                button.addEventListener("click", updateUser());
+            }
             button.textContent = isEditing ? 'Edit' : 'Save';
+        }
 
-            
+        const updateUser = () => {
+            try {
+                    const request1 = await fetch("http://localhost/progetto_demo_php/edit_user.php", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dataObject),
+                    });
+                    const jsonResponse = await request1.json();
+                    if (jsonResponse.status) {
+                        
+
+                    } else {
+                       
+                    }                                         
+                }catch(error){
+                    console.error(error);
+                }
         }
     </script>
 </body>
