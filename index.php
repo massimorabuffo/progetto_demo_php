@@ -51,7 +51,8 @@
                                         <td>$row[function]</td>
                                         <td>$row[status]</td>
                                         <td>$row[employed]</td>
-                                        </tr>";
+                                        <td><button onclick='editUser(this)'>Edit</button></td>
+                                    </tr>";
                             }
                              ?>
                             </tbody>
@@ -130,6 +131,36 @@
                 }catch(error){
                     console.error(error);
                 }
+        }
+
+        const editUser = (button) => {
+            // Ottieni la riga corrente
+            let row = button.parentNode.parentNode;
+
+            // Ottieni le celle della riga
+            let cells = row.getElementsByTagName('td');
+
+            // Controlla se stiamo in modalità modifica
+            let isEditing = button.textContent === 'Save';
+
+            for (let i = 0; i < cells.length - 1; i++) {
+                if (isEditing) {
+                    // Salva i dati e ripristina le celle di testo normale
+                    let input = cells[i].getElementsByTagName('input')[0];
+                    cells[i].textContent = input.value;
+                } else {
+                    // Converte le celle di testo in input per la modifica
+                    let cellValue = cells[i].textContent;
+                    cells[i].innerHTML = '<input type="text" value="' + cellValue + '">';
+                }
+            }
+
+            // Cambia il testo del bottone
+            
+
+            button.textContent = isEditing ? 'Edit' : 'Save';
+
+            
         }
     </script>
 </body>
